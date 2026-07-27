@@ -1,95 +1,72 @@
-/* styles.css - versión monocromo suavizada: contrastes y sombras más suaves, transiciones más lentas */
+/* styles.css — versión ultra-suave monocroma */
 :root{
-  --bg:#ffffff;         /* fondo principal blanco */
-  --paper:#fcfcfc;      /* color del "papel" */
-  --ink:#222222;        /* color del texto */
-  --muted:#7a7a7a;      /* texto secundario */
-  --border:rgba(34,34,34,0.06);     /* bordes suaves */
-  --shadow: rgba(34,34,34,0.03);
+  --bg:#ffffff;
+  --paper:#fdfdfd;
+  --ink:#222222;
+  --muted:#8b8b8b;
+  --border:rgba(34,34,34,0.04);
+  --shadow: rgba(34,34,34,0.02);
 }
 
-/* Reset y tipografías */
+/* Base */
 body.bg-page{
-  background: var(--bg);
-  color: var(--ink);
-  font-family: "Playfair Display", serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Playfair Display",serif;
+  line-height:1.6;
   -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.5;
 }
 
 /* Envoltorio / Sobre */
 .envelope{
-  width:360px;
-  height:240px;
-  position:relative;
-  perspective:900px;
-  cursor:pointer;
-  margin:0 auto 26px auto;
+  width:340px; height:220px;
+  perspective:1000px; margin:0 auto 28px;
 }
 .envelope .flap{
   position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:60%;
-  background: linear-gradient(180deg, #ffffff, #fbfbfb);
-  border-radius:10px 10px 0 0;
+  top:0; left:0; width:100%; height:60%;
+  background:linear-gradient(180deg,#fff,#fbfbfb);
+  border-radius:12px 12px 0 0;
   transform-origin:top center;
-  transition: transform .9s cubic-bezier(.22,.9,.3,1), box-shadow .25s;
-  box-shadow: 0 6px 24px var(--shadow);
+  transition: transform 1.05s cubic-bezier(.22,.9,.3,1), box-shadow .4s;
+  box-shadow:0 4px 18px var(--shadow);
   border:1px solid var(--border);
 }
 .envelope.open .flap{
-  transform: rotateX(180deg) translateY(-12%);
-  box-shadow: 0 18px 50px rgba(34,34,34,0.04);
+  transform: rotateX(150deg) translateY(-10%);
+  box-shadow:0 14px 40px rgba(34,34,34,0.025);
 }
 .envelope .body{
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  top:40%;
-  background: var(--paper);
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 8px 30px var(--shadow);
-  border:1px solid var(--border);
-  padding:12px;
+  position:absolute; bottom:0; left:0; right:0; top:40%;
+  border-radius:12px; padding:14px;
+  box-shadow:0 6px 26px var(--shadow); border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
 }
+
+/* Tipografía */
 .card-invite{ background:transparent; border:none; padding:0 12px; }
-.couple-name{ font-family: "Playfair Display", serif; font-size:2rem; color:var(--ink); letter-spacing:0.5px; font-weight:600 }
-.lead{ color:var(--muted); margin-bottom:0.25rem; font-size:1rem }
-.date{ color:var(--muted); font-weight:600; font-size:0.95rem }
+.couple-name{ font-size:1.85rem; font-weight:600; letter-spacing:0.4px; color:var(--ink); }
+.lead, .date{ color:var(--muted); font-weight:500; }
 
 /* Reveal animation */
 .invitation-content{ animation:fade .55s ease both; }
 @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
 
-/* Cards and layout */
-.card{ border-radius:14px; border:1px solid var(--border); background:linear-gradient(180deg,var(--paper),#ffffff); padding:20px }
-.card h2{ font-weight:700; margin-bottom:0.5rem; color:var(--ink) }
+/* Cartas / secciones */
+.card{ border-radius:16px; background:linear-gradient(180deg,var(--paper),#fff); border:1px solid var(--border); padding:20px }
+.card h2{ color:var(--ink); margin-bottom:0.5rem; font-weight:700 }
 .card p{ color:var(--muted); margin-bottom:0.6rem }
 
-/* Swatches -> tonos neutros y suaves */
-.swatch{ padding:16px; border-radius:10px; text-align:center; font-weight:700; box-shadow:0 6px 18px rgba(34,34,34,0.03); color:var(--ink); border:1px solid var(--border) }
-.swatch small{ display:block; font-weight:500; color:var(--muted); margin-top:6px }
-.swatch.gray-1{ background:#ffffff }
-.swatch.gray-2{ background:#fafafa }
-.swatch.gray-3{ background:#f4f4f4 }
-.swatch.gray-4{ background:#efefef }
+/* Swatches */
+.swatch{ padding:14px; border-radius:12px; box-shadow:0 6px 20px rgba(34,34,34,0.015); border:1px solid var(--border); text-align:center; font-weight:700 }
+.swatch small{ color:var(--muted); display:block; margin-top:6px }
 
 /* Gallery images - monocromo suave */
 img{
-  max-width:100%;
-  height:auto;
-  display:block;
+  max-width:100%; height:auto; display:block;
   filter: grayscale(90%) contrast(0.98) brightness(1.02);
   transition: transform .45s ease, filter .45s ease, box-shadow .45s ease;
-  border-radius:10px;
-  box-shadow: 0 10px 30px rgba(34,34,34,0.02);
+  border-radius:10px; box-shadow: 0 10px 30px rgba(34,34,34,0.02);
 }
 img:hover{ transform: scale(1.01); filter: grayscale(50%) contrast(1.01) }
 
