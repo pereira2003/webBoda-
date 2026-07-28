@@ -1,9 +1,9 @@
-/* styles.css — ultra-suave monocromo + ornamentación estilo castillo/gótico */
+/* styles.css — ultra-suave monocromo + ornamentación estilo castillo/gótico + tipografía aplicada globalmente para "Aura & Osiel" */
 :root{
   --bg:#ffffff;
   --paper:#fefefe;
   --ink:#111111;
-  --muted:#7d7d7d;
+  --muted:#6f6f6f;
   --border:rgba(17,17,17,0.05);
   --shadow: rgba(17,17,17,0.03);
   --accent-stroke: rgba(17,17,17,0.06);
@@ -13,52 +13,78 @@
 body.bg-page{
   background:var(--bg);
   color:var(--ink);
-  font-family:"Playfair Display", serif;
-  line-height:1.6;
+  font-family:"Playfair Display", serif; /* body serif */
+  font-size:16px;
+  line-height:1.65;
   -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  -webkit-font-feature-settings: "liga" 1, "kern" 1;
 }
 .container{ max-width:980px }
 
-/* Typography accents (gothic feel) */
-h1, h2 { font-family: 'Cinzel', serif }
-.couple-name{ font-size:2rem; font-weight:700; letter-spacing:0.6px }
+/* Typography: headings use Cinzel for a more 'castle/gothic' feel */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cinzel', serif;
+  color:var(--ink);
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  -webkit-font-smoothing:antialiased;
+}
 
-/* ENVELOPE - realistic paper with triangular flap */
+/* Global adjustments to make all text feel consistent and elegant */
+p, li, label, .lead, .date, .small { color:var(--muted); font-family: "Playfair Display", serif; letter-spacing:0.02em }
+.nav .nav-link{ font-variant:small-caps; letter-spacing:0.12em; color:var(--muted); }
+.nav .nav-link.active{ color:var(--ink); font-weight:700 }
+
+/* Couple name: decorative, larger, and with subtle ornament */
+.couple-name{
+  font-family: 'Cinzel', serif;
+  font-size:2.25rem;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  position:relative;
+  margin:0;
+  padding:0 6px;
+}
+.couple-name::after{
+  content: '';
+  display:block;
+  width:60px;
+  height:6px;
+  margin:10px auto 0;
+  border-radius:6px;
+  background:linear-gradient(90deg, rgba(17,17,17,0.06), rgba(17,17,17,0.02));
+}
+
+/* Add subtle aura effect behind couple name (soft glow in grayscale) */
+.card-invite{ position:relative; }
+.card-invite .aura {
+  position:absolute; left:50%; top:38%; transform:translateX(-50%); width:240px; height:80px; border-radius:60px; z-index:-1;
+  background: radial-gradient(closest-side, rgba(17,17,17,0.04), rgba(17,17,17,0.00));
+  filter: blur(12px);
+  opacity:0.85;
+}
+
+/* Envelope tweaks to look like a real paper envelope */
 .envelope{ width:380px; height:240px; position:relative; perspective:1100px; margin:0 auto 26px; }
-.env-body{
-  position:relative; width:100%; height:100%; background:linear-gradient(180deg,#fff,#fbfbfb); border-radius:14px; border:1px solid var(--border); box-shadow:0 10px 40px var(--shadow); overflow:hidden;
-}
-.env-inner{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:14px }
-
-/* Triangular flap created with CSS transform */
-.env-flap{
-  position:absolute; left:50%; top:0; transform:translateX(-50%) translateZ(0); width:92%; height:56%; transform-origin:top center; pointer-events:none;
-  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-  background: linear-gradient(180deg,#f8f7f7,#ffffff);
-  border:1px solid var(--border); border-bottom:0; border-radius: 0 0 40% 40% / 0 0 18% 18%;
-  box-shadow: 0 12px 40px rgba(17,17,17,0.04);
-  transition: transform 1.05s cubic-bezier(.22,.9,.3,1), box-shadow .4s;
-}
+.env-body{ position:relative; width:100%; height:100%; background:linear-gradient(180deg,#fff,#fbfbfb); border-radius:14px; border:1px solid var(--border); box-shadow:0 12px 40px var(--shadow); overflow:hidden; }
+.env-inner{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:18px }
+.env-flap{ position:absolute; left:50%; top:0; transform:translateX(-50%) translateZ(0); width:92%; height:56%; transform-origin:top center; pointer-events:none; clip-path: polygon(50% 0%, 100% 100%, 0% 100%); background: linear-gradient(180deg,#f8f7f7,#ffffff); border:1px solid var(--border); border-bottom:0; border-radius: 0 0 40% 40% / 0 0 18% 18%; box-shadow: 0 12px 40px rgba(17,17,17,0.04); transition: transform 1.05s cubic-bezier(.22,.9,.3,1), box-shadow .4s; }
 .envelope.open .env-flap{ transform: translateX(-50%) translateY(-2%) rotateX(160deg); box-shadow:0 6px 28px rgba(17,17,17,0.02) }
 
-/* corner ornaments (subtle) */
-.env-corner{ position:absolute; top:8px; width:60px; height:42px; opacity:0.9 }
-.env-corner-left{ left:8px }
-.env-corner-right{ right:8px }
-
-/* small floral svg placed inside flap area */
-.env-flap .floral{ position:absolute; left:50%; transform:translateX(-50%); top:10px; opacity:0.85 }
+/* Make corner ornaments slightly more pronounced */
+.env-corner svg path{ stroke-opacity:0.06 }
 
 /* Reveal animation */
 .invitation-content{ animation:fade .55s ease both; }
 @keyframes fade{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
 
 /* Sections (cards) */
-.card{ border-radius:16px; background:linear-gradient(180deg,var(--paper),#fff); border:1px solid var(--border); padding:20px; box-shadow:0 10px 30px var(--shadow); }
-.card h2{ font-weight:700; margin-bottom:0.5rem }
+.card{ border-radius:16px; background:linear-gradient(180deg,var(--paper),#fff); border:1px solid var(--border); padding:22px; box-shadow:0 10px 30px var(--shadow); }
+.card h2{ font-weight:700; margin-bottom:0.5rem; letter-spacing:0.14em }
 .card p{ color:var(--muted); margin-bottom:0.6rem }
 
-/* Dresscode swatches - monochrome tones with subtle frames */
+/* Dresscode swatches - monochrome tones */
 .swatch{ padding:14px; border-radius:12px; box-shadow:0 8px 24px rgba(17,17,17,0.02); border:1px solid var(--border); text-align:center; font-weight:700 }
 .swatch small{ color:var(--muted); display:block; margin-top:6px }
 
@@ -80,11 +106,15 @@ img:hover{ transform: translateY(-4px) scale(1.01); filter:grayscale(45%) }
 .btn-outline-success:hover{ background:#fafafa }
 .btn-success{ background:#111; border-color:#111 }
 
+/* Form labels and inputs - elegant */
+.form-label{ font-family:"Playfair Display", serif; color:var(--muted); font-weight:600; letter-spacing:0.06em }
+.form-control, .form-select, textarea{ border-radius:8px; border:1px solid var(--border); box-shadow:none }
+
 /* Footer */
 footer{ color:var(--muted); margin-top:18px }
 
 /* Responsive */
-@media (max-width:768px){ .envelope{ width:320px; height:200px } .couple-name{ font-size:1.6rem } }
+@media (max-width:768px){ .envelope{ width:320px; height:200px } .couple-name{ font-size:1.6rem } .container{ padding-left:12px; padding-right:12px } }
 
 /* Focus */
 button:focus, a:focus, input:focus, select:focus, textarea:focus{ outline:3px solid rgba(17,17,17,0.06); outline-offset:3px }
