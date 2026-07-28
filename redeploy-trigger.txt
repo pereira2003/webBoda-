@@ -1,0 +1,3 @@
+Trigger Pages redeploy
+Timestamp: 2026-07-28T17:13:00Z
+Purpose: small commit to force GitHub Pages rebuild per user request.
