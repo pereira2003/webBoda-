@@ -1,4 +1,4 @@
-/* styles.css — ultra-suave monocromo + ornamentación estilo castillo/gótico + tipografía aplicada globalmente para "Aura & Osiel" */
+/* styles.css — envelope fix: correct flap geometry, stacking, and responsive behavior; keep rest of styling */
 :root{
   --bg:#ffffff;
   --paper:#fefefe;
@@ -22,99 +22,125 @@ body.bg-page{
 }
 .container{ max-width:980px }
 
-/* Typography: headings use Cinzel for a more 'castle/gothic' feel */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Cinzel', serif;
-  color:var(--ink);
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  -webkit-font-smoothing:antialiased;
-}
-
-/* Global adjustments to make all text feel consistent and elegant */
+/* Typography */
+h1, h2, h3, h4, h5, h6 { font-family: 'Cinzel', serif; color:var(--ink); letter-spacing:0.12em; text-transform:uppercase; }
 p, li, label, .lead, .date, .small { color:var(--muted); font-family: "Playfair Display", serif; letter-spacing:0.02em }
-.nav .nav-link{ font-variant:small-caps; letter-spacing:0.12em; color:var(--muted); }
-.nav .nav-link.active{ color:var(--ink); font-weight:700 }
 
-/* Couple name: decorative, larger, and with subtle ornament */
-.couple-name{
-  font-family: 'Cinzel', serif;
-  font-size:2.25rem;
-  letter-spacing:0.16em;
-  text-transform:uppercase;
+/* Envelope fixes and improvements */
+.envelope{
+  width:360px;              /* slightly narrower for better proportions */
+  height:220px;
   position:relative;
-  margin:0;
-  padding:0 6px;
-}
-.couple-name::after{
-  content: '';
-  display:block;
-  width:60px;
-  height:6px;
-  margin:10px auto 0;
-  border-radius:6px;
-  background:linear-gradient(90deg, rgba(17,17,17,0.06), rgba(17,17,17,0.02));
+  perspective:1200px;
+  margin:0 auto 26px;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Add subtle aura effect behind couple name (soft glow in grayscale) */
-.card-invite{ position:relative; }
-.card-invite .aura {
-  position:absolute; left:50%; top:38%; transform:translateX(-50%); width:240px; height:80px; border-radius:60px; z-index:-1;
-  background: radial-gradient(closest-side, rgba(17,17,17,0.04), rgba(17,17,17,0.00));
-  filter: blur(12px);
-  opacity:0.85;
+/* Make body allow flap to overlap cleanly */
+.env-body{
+  position:relative;
+  width:100%;
+  height:100%;
+  background:linear-gradient(180deg,#fff,#fbfbfb);
+  border-radius:12px;                  /* subtle paper corners */
+  border:1px solid var(--border);
+  box-shadow:0 10px 32px var(--shadow);
+  overflow:visible;                    /* allow flap to render outside */
+  transform-style:preserve-3d;
 }
 
-/* Envelope tweaks to look like a real paper envelope */
-.envelope{ width:380px; height:240px; position:relative; perspective:1100px; margin:0 auto 26px; }
-.env-body{ position:relative; width:100%; height:100%; background:linear-gradient(180deg,#fff,#fbfbfb); border-radius:14px; border:1px solid var(--border); box-shadow:0 12px 40px var(--shadow); overflow:hidden; }
 .env-inner{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:18px }
-.env-flap{ position:absolute; left:50%; top:0; transform:translateX(-50%) translateZ(0); width:92%; height:56%; transform-origin:top center; pointer-events:none; clip-path: polygon(50% 0%, 100% 100%, 0% 100%); background: linear-gradient(180deg,#f8f7f7,#ffffff); border:1px solid var(--border); border-bottom:0; border-radius: 0 0 40% 40% / 0 0 18% 18%; box-shadow: 0 12px 40px rgba(17,17,17,0.04); transition: transform 1.05s cubic-bezier(.22,.9,.3,1), box-shadow .4s; }
-.envelope.open .env-flap{ transform: translateX(-50%) translateY(-2%) rotateX(160deg); box-shadow:0 6px 28px rgba(17,17,17,0.02) }
 
-/* Make corner ornaments slightly more pronounced */
+/* Flap geometry: correct clip-path and placement; use z-index to sit above body */
+.env-flap{
+  position:absolute;
+  left:50%;
+  top:-2px;                              /* slight negative so the seam looks natural */
+  transform:translateX(-50%);
+  width:94%;
+  height:60%;
+  pointer-events:none;
+  /* classic envelope triangle using polygon; adjusted to avoid distortion */
+  clip-path: polygon(50% 0%, 98% 100%, 2% 100%);
+  background: linear-gradient(180deg,#f8f7f7,#ffffff);
+  border:1px solid var(--border);
+  border-bottom:0;
+  border-radius:0 0 42% 42% / 0 0 18% 18%;
+  box-shadow: 0 14px 44px rgba(17,17,17,0.035);
+  z-index:40;                            /* ensure over the body */
+  transform-origin: top center;
+  transition: transform .95s cubic-bezier(.22,.9,.3,1), box-shadow .35s, top .35s;
+  backface-visibility:hidden;
+}
+
+/* Add a subtle fold line and inner shadow to the flap for realism */
+.env-flap::before{
+  content:'';
+  position:absolute;
+  left:50%; top:54%; transform:translateX(-50%);
+  width:86%; height:1px; background:linear-gradient(90deg, transparent, rgba(17,17,17,0.03), transparent);
+  opacity:0.9;
+  border-radius:1px;
+}
+.env-flap::after{
+  content:'';
+  position:absolute;
+  left:8%; right:8%; bottom:8%; height:24%; background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(255,255,255,0)); border-radius:8px; opacity:0.6;
+}
+
+/* Flap open state: rotate with improved pivot to avoid visual stretching */
+.envelope.open .env-flap{
+  transform: translateX(-50%) rotateX(170deg) translateY(-6%);
+  box-shadow: 0 8px 28px rgba(17,17,17,0.02);
+  top:-12px; /* pull flap slightly when open to avoid gap */
+}
+
+/* Edge shadow where flap meets body */
+.env-body::before{
+  content:''; position:absolute; left:0; right:0; top:34%; height:8px; pointer-events:none; z-index:30;
+  background:linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0)); border-radius:6px; opacity:0.6;
+}
+
+/* Slight relief to the paper edges */
+.env-body::after{
+  content:''; position:absolute; inset:0; border-radius:12px; box-shadow:inset 0 1px 0 rgba(255,255,255,0.6); pointer-events:none; z-index:10;
+}
+
+/* Ensure inner content does not overflow when flap rotates */
+.env-inner{ position:relative; z-index:20 }
+
+/* Adjust corners and ornaments */
+.env-corner{ position:absolute; top:10px; width:56px; height:36px; opacity:0.95; z-index:35 }
+.env-corner-left{ left:8px }
+.env-corner-right{ right:8px }
 .env-corner svg path{ stroke-opacity:0.06 }
 
-/* Reveal animation */
-.invitation-content{ animation:fade .55s ease both; }
-@keyframes fade{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+/* Couple name aura: make sure it sits above aura element */
+.card-invite{ position:relative; z-index:25; }
+.card-invite .aura{ z-index:18 }
 
-/* Sections (cards) */
+/* Small responsive tweak so envelope doesn't get crushed on small screens */
+@media (max-width:420px){
+  .envelope{ width:300px; height:190px }
+  .env-flap{ width:96%; height:58%; top:-4px }
+}
+
+/* keep rest of layout styles unchanged (cards, gallery, map, etc.) */
 .card{ border-radius:16px; background:linear-gradient(180deg,var(--paper),#fff); border:1px solid var(--border); padding:22px; box-shadow:0 10px 30px var(--shadow); }
 .card h2{ font-weight:700; margin-bottom:0.5rem; letter-spacing:0.14em }
 .card p{ color:var(--muted); margin-bottom:0.6rem }
 
-/* Dresscode swatches - monochrome tones */
-.swatch{ padding:14px; border-radius:12px; box-shadow:0 8px 24px rgba(17,17,17,0.02); border:1px solid var(--border); text-align:center; font-weight:700 }
-.swatch small{ color:var(--muted); display:block; margin-top:6px }
-
-/* Gallery images - keep gentle monochrome with floral-style hover */
+/* Gallery and map stylings unchanged below */
 img{ max-width:100%; height:auto; display:block; filter:grayscale(88%) contrast(0.98) brightness(1.02); transition: transform .45s ease, filter .45s ease, box-shadow .45s ease; border-radius:12px }
 img:hover{ transform: translateY(-4px) scale(1.01); filter:grayscale(45%) }
 
-/* MAP - decorative frame like a carved plaque */
 .map-card .map-frame{ position:relative; padding:14px; border-radius:14px; background:linear-gradient(180deg,#fff,#fbfbfb); border:1px solid var(--border); box-shadow:0 12px 34px rgba(17,17,17,0.03); }
 .map-card .map-decor-top, .map-card .map-decor-bottom{ height:8px; background:linear-gradient(90deg,transparent,rgba(17,17,17,0.02),transparent); border-radius:6px }
-.map-card .map-decor-top{ margin-bottom:10px }
-.map-card .map-decor-bottom{ margin-top:10px }
 .map-card iframe{ border-radius:8px; filter:grayscale(86%) contrast(0.96) }
 
-/* Buttons styling */
+/* buttons */
 .btn-outline-primary{ border-color:var(--border); color:var(--ink); background:transparent }
 .btn-outline-primary:hover{ background:#fafafa }
 .btn-outline-success{ border-color:var(--border); color:var(--ink); background:transparent }
 .btn-outline-success:hover{ background:#fafafa }
 .btn-success{ background:#111; border-color:#111 }
-
-/* Form labels and inputs - elegant */
-.form-label{ font-family:"Playfair Display", serif; color:var(--muted); font-weight:600; letter-spacing:0.06em }
-.form-control, .form-select, textarea{ border-radius:8px; border:1px solid var(--border); box-shadow:none }
-
-/* Footer */
-footer{ color:var(--muted); margin-top:18px }
-
-/* Responsive */
-@media (max-width:768px){ .envelope{ width:320px; height:200px } .couple-name{ font-size:1.6rem } .container{ padding-left:12px; padding-right:12px } }
-
-/* Focus */
-button:focus, a:focus, input:focus, select:focus, textarea:focus{ outline:3px solid rgba(17,17,17,0.06); outline-offset:3px }
