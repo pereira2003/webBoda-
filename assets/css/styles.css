@@ -1,96 +1,90 @@
-/* styles.css — versión ultra-suave monocroma */
+/* styles.css — ultra-suave monocromo + ornamentación estilo castillo/gótico */
 :root{
   --bg:#ffffff;
-  --paper:#fdfdfd;
-  --ink:#222222;
-  --muted:#8b8b8b;
-  --border:rgba(34,34,34,0.04);
-  --shadow: rgba(34,34,34,0.02);
+  --paper:#fefefe;
+  --ink:#111111;
+  --muted:#7d7d7d;
+  --border:rgba(17,17,17,0.05);
+  --shadow: rgba(17,17,17,0.03);
+  --accent-stroke: rgba(17,17,17,0.06);
 }
 
 /* Base */
 body.bg-page{
   background:var(--bg);
   color:var(--ink);
-  font-family:"Playfair Display",serif;
+  font-family:"Playfair Display", serif;
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
 }
+.container{ max-width:980px }
 
-/* Envoltorio / Sobre */
-.envelope{
-  width:340px; height:220px;
-  perspective:1000px; margin:0 auto 28px;
+/* Typography accents (gothic feel) */
+h1, h2 { font-family: 'Cinzel', serif }
+.couple-name{ font-size:2rem; font-weight:700; letter-spacing:0.6px }
+
+/* ENVELOPE - realistic paper with triangular flap */
+.envelope{ width:380px; height:240px; position:relative; perspective:1100px; margin:0 auto 26px; }
+.env-body{
+  position:relative; width:100%; height:100%; background:linear-gradient(180deg,#fff,#fbfbfb); border-radius:14px; border:1px solid var(--border); box-shadow:0 10px 40px var(--shadow); overflow:hidden;
 }
-.envelope .flap{
-  position:absolute;
-  top:0; left:0; width:100%; height:60%;
-  background:linear-gradient(180deg,#fff,#fbfbfb);
-  border-radius:12px 12px 0 0;
-  transform-origin:top center;
+.env-inner{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:14px }
+
+/* Triangular flap created with CSS transform */
+.env-flap{
+  position:absolute; left:50%; top:0; transform:translateX(-50%) translateZ(0); width:92%; height:56%; transform-origin:top center; pointer-events:none;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  background: linear-gradient(180deg,#f8f7f7,#ffffff);
+  border:1px solid var(--border); border-bottom:0; border-radius: 0 0 40% 40% / 0 0 18% 18%;
+  box-shadow: 0 12px 40px rgba(17,17,17,0.04);
   transition: transform 1.05s cubic-bezier(.22,.9,.3,1), box-shadow .4s;
-  box-shadow:0 4px 18px var(--shadow);
-  border:1px solid var(--border);
 }
-.envelope.open .flap{
-  transform: rotateX(150deg) translateY(-10%);
-  box-shadow:0 14px 40px rgba(34,34,34,0.025);
-}
-.envelope .body{
-  position:absolute; bottom:0; left:0; right:0; top:40%;
-  border-radius:12px; padding:14px;
-  box-shadow:0 6px 26px var(--shadow); border:1px solid var(--border);
-  display:flex; align-items:center; justify-content:center;
-}
+.envelope.open .env-flap{ transform: translateX(-50%) translateY(-2%) rotateX(160deg); box-shadow:0 6px 28px rgba(17,17,17,0.02) }
 
-/* Tipografía */
-.card-invite{ background:transparent; border:none; padding:0 12px; }
-.couple-name{ font-size:1.85rem; font-weight:600; letter-spacing:0.4px; color:var(--ink); }
-.lead, .date{ color:var(--muted); font-weight:500; }
+/* corner ornaments (subtle) */
+.env-corner{ position:absolute; top:8px; width:60px; height:42px; opacity:0.9 }
+.env-corner-left{ left:8px }
+.env-corner-right{ right:8px }
+
+/* small floral svg placed inside flap area */
+.env-flap .floral{ position:absolute; left:50%; transform:translateX(-50%); top:10px; opacity:0.85 }
 
 /* Reveal animation */
 .invitation-content{ animation:fade .55s ease both; }
-@keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+@keyframes fade{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
 
-/* Cartas / secciones */
-.card{ border-radius:16px; background:linear-gradient(180deg,var(--paper),#fff); border:1px solid var(--border); padding:20px }
-.card h2{ color:var(--ink); margin-bottom:0.5rem; font-weight:700 }
+/* Sections (cards) */
+.card{ border-radius:16px; background:linear-gradient(180deg,var(--paper),#fff); border:1px solid var(--border); padding:20px; box-shadow:0 10px 30px var(--shadow); }
+.card h2{ font-weight:700; margin-bottom:0.5rem }
 .card p{ color:var(--muted); margin-bottom:0.6rem }
 
-/* Swatches */
-.swatch{ padding:14px; border-radius:12px; box-shadow:0 6px 20px rgba(34,34,34,0.015); border:1px solid var(--border); text-align:center; font-weight:700 }
+/* Dresscode swatches - monochrome tones with subtle frames */
+.swatch{ padding:14px; border-radius:12px; box-shadow:0 8px 24px rgba(17,17,17,0.02); border:1px solid var(--border); text-align:center; font-weight:700 }
 .swatch small{ color:var(--muted); display:block; margin-top:6px }
 
-/* Gallery images - monocromo suave */
-img{
-  max-width:100%; height:auto; display:block;
-  filter: grayscale(90%) contrast(0.98) brightness(1.02);
-  transition: transform .45s ease, filter .45s ease, box-shadow .45s ease;
-  border-radius:10px; box-shadow: 0 10px 30px rgba(34,34,34,0.02);
-}
-img:hover{ transform: scale(1.01); filter: grayscale(50%) contrast(1.01) }
+/* Gallery images - keep gentle monochrome with floral-style hover */
+img{ max-width:100%; height:auto; display:block; filter:grayscale(88%) contrast(0.98) brightness(1.02); transition: transform .45s ease, filter .45s ease, box-shadow .45s ease; border-radius:12px }
+img:hover{ transform: translateY(-4px) scale(1.01); filter:grayscale(45%) }
 
-/* Carousel images */
-.carousel-item img{ border-radius:12px }
+/* MAP - decorative frame like a carved plaque */
+.map-card .map-frame{ position:relative; padding:14px; border-radius:14px; background:linear-gradient(180deg,#fff,#fbfbfb); border:1px solid var(--border); box-shadow:0 12px 34px rgba(17,17,17,0.03); }
+.map-card .map-decor-top, .map-card .map-decor-bottom{ height:8px; background:linear-gradient(90deg,transparent,rgba(17,17,17,0.02),transparent); border-radius:6px }
+.map-card .map-decor-top{ margin-bottom:10px }
+.map-card .map-decor-bottom{ margin-top:10px }
+.map-card iframe{ border-radius:8px; filter:grayscale(86%) contrast(0.96) }
 
-/* Map iframe estilo */
-.ratio iframe{ filter: grayscale(90%) contrast(0.96) brightness(1.03); border-radius:10px; }
-
-/* Buttons - suaves */
+/* Buttons styling */
 .btn-outline-primary{ border-color:var(--border); color:var(--ink); background:transparent }
-.btn-outline-primary:hover{ background:#f7f7f7 }
+.btn-outline-primary:hover{ background:#fafafa }
 .btn-outline-success{ border-color:var(--border); color:var(--ink); background:transparent }
-.btn-outline-success:hover{ background:#f7f7f7 }
+.btn-outline-success:hover{ background:#fafafa }
 .btn-success{ background:#111; border-color:#111 }
 
 /* Footer */
 footer{ color:var(--muted); margin-top:18px }
 
-/* Responsive tweaks */
-@media (max-width:768px){
-  .couple-name{ font-size:1.6rem }
-  .envelope{ width:320px; height:200px }
-}
+/* Responsive */
+@media (max-width:768px){ .envelope{ width:320px; height:200px } .couple-name{ font-size:1.6rem } }
 
-/* Accesibilidad focus */
-button:focus, a:focus, input:focus, select:focus, textarea:focus{ outline: 3px solid rgba(34,34,34,0.06); outline-offset:3px }
+/* Focus */
+button:focus, a:focus, input:focus, select:focus, textarea:focus{ outline:3px solid rgba(17,17,17,0.06); outline-offset:3px }
