@@ -31,13 +31,13 @@ return [
     // -----------------------------------------------------------
     'ceremonia' => [
         'titulo'    => 'La Ceremonia',
-        'lugar'     => 'Cajamarca',            // EDITAR: nombre exacto del lugar
-        'direccion' => 'Cajamarca, El Salvador', // EDITAR: dirección completa
+        'lugar'     => 'Ruta al Boquerón',
+        'direccion' => 'Ruta al Boquerón Km 22.5, Volcán de S.S., San Salvador',
         'hora'      => '5:00 PM',
         // Coordenadas para el botón "Cómo llegar".
         // Reemplázalas por las reales (clic derecho en Google Maps > "¿Qué hay aquí?")
-        'lat'       => 13.9188,   // EDITAR: coordenadas reales de Cajamarca, El Salvador
-        'lng'       => -89.5518,  // EDITAR
+        'lat'       => 13.7523698,
+        'lng'       => -89.2667931,
     ],
 
     // -----------------------------------------------------------
@@ -45,11 +45,11 @@ return [
     // -----------------------------------------------------------
     'recepcion' => [
         'titulo'    => 'La Recepción',
-        'lugar'     => 'Cajamarca',            // EDITAR: nombre exacto del lugar
-        'direccion' => 'Cajamarca, El Salvador', // EDITAR: dirección completa
+        'lugar'     => 'Ruta al Boquerón',
+        'direccion' => 'Ruta al Boquerón Km 22.5, Volcán de S.S., San Salvador',
         'hora'      => '7:00 PM',
-        'lat'       => 13.9188,   // EDITAR
-        'lng'       => -89.5518,  // EDITAR
+        'lat'       => 13.7523698,
+        'lng'       => -89.2667931,
     ],
 
     // -----------------------------------------------------------

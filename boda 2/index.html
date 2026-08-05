@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/img/intro-fondo.jpg">
 
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -16,8 +17,8 @@
 
 <!-- ============ SOBRE DE BIENVENIDA (intro animada) ============ -->
 <div class="intro" id="intro" data-intro>
-  <div class="intro__bg" style="background-image:url('assets/img/intro-fondo.jpg')"></div>
-  <div class="intro__scrim"></div>
+    <div class="intro__bg" data-bg="assets/img/intro-fondo.jpg"></div>
+    <noscript><style>.intro__bg{background-image:url('assets/img/intro-fondo.jpg');}</style></noscript>
 
   <div class="intro__stage">
     <p class="intro__eyebrow reveal is-visible">Nos casamos</p>
@@ -124,7 +125,7 @@
 <section class="section" id="historia">
   <div class="wrap story">
     <div class="story__frame reveal">
-      <img src="assets/img/portada.jpg" alt="Osiel y Aura"
+      <img src="assets/img/portada.jpg" alt="Osiel y Aura" loading="lazy" decoding="async"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
       <div class="placeholder-label" style="display:none; height:100%; align-items:center; justify-content:center;">
         Foto de portada<br>(reemplaza en config.php)
@@ -229,8 +230,8 @@
         </svg>
         <span class="hora">5:00 PM</span>
         <h3>La Ceremonia</h3>
-        <p class="dir">Cajamarca<br>Cajamarca, El Salvador</p>
-        <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=13.9188%2C-89.5518" target="_blank" rel="noopener">Cómo llegar</a>
+        <p class="dir">Ruta al Boquerón Km 22.5<br>Volcán de S.S., San Salvador</p>
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=13.7523698%2C-89.2667931" target="_blank" rel="noopener">Cómo llegar</a>
       </div>
 
       <div class="venue-card reveal">
@@ -240,8 +241,8 @@
         </svg>
         <span class="hora">7:00 PM</span>
         <h3>La Recepción</h3>
-        <p class="dir">Cajamarca<br>Cajamarca, El Salvador</p>
-        <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=13.9188%2C-89.5518" target="_blank" rel="noopener">Cómo llegar</a>
+        <p class="dir">Ruta al Boquerón Km 22.5<br>Volcán de S.S., San Salvador</p>
+        <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=13.7523698%2C-89.2667931" target="_blank" rel="noopener">Cómo llegar</a>
       </div>
     </div>
   </div>
@@ -353,19 +354,19 @@
     <div class="gallery reveal">
       <div class="gallery__track" data-gallery-track data-autoplay="4200">
                   <div class="gallery__item">
-            <img src="assets/img/foto1.jpg" alt="Foto 1 de Osiel y Aura"
+            <img src="assets/img/foto1.jpg" alt="Foto 1 de Osiel y Aura" loading="lazy" decoding="async"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="placeholder-label" style="display:none; height:100%; align-items:center; justify-content:center;">
               Foto 1            </div>
           </div>
                   <div class="gallery__item">
-            <img src="assets/img/foto2.jpg" alt="Foto 2 de Osiel y Aura"
+            <img src="assets/img/foto2.jpg" alt="Foto 2 de Osiel y Aura" loading="lazy" decoding="async"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="placeholder-label" style="display:none; height:100%; align-items:center; justify-content:center;">
               Foto 2            </div>
           </div>
                   <div class="gallery__item">
-            <img src="assets/img/foto3.jpg" alt="Foto 3 de Osiel y Aura"
+            <img src="assets/img/foto3.jpg" alt="Foto 3 de Osiel y Aura" loading="lazy" decoding="async"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="placeholder-label" style="display:none; height:100%; align-items:center; justify-content:center;">
               Foto 3            </div>

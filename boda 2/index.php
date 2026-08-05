@@ -30,6 +30,7 @@ $nombreElla = $c['novios']['ella'];
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="<?= e($c['sobre']['fondo']) ?>">
 
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -38,7 +39,8 @@ $nombreElla = $c['novios']['ella'];
 <?php if (!empty($c['sobre']['activo'])): ?>
 <!-- ============ SOBRE DE BIENVENIDA (intro animada) ============ -->
 <div class="intro" id="intro" data-intro>
-  <div class="intro__bg" style="background-image:url('<?= e($c['sobre']['fondo']) ?>')"></div>
+  <div class="intro__bg" data-bg="<?= e($c['sobre']['fondo']) ?>"></div>
+  <noscript><style>.intro__bg{background-image:url('<?= e($c['sobre']['fondo']) ?>');}</style></noscript>
   <div class="intro__scrim"></div>
 
   <div class="intro__stage">
@@ -147,7 +149,7 @@ $nombreElla = $c['novios']['ella'];
 <section class="section" id="historia">
   <div class="wrap story">
     <div class="story__frame reveal">
-      <img src="<?= e($c['foto_portada']) ?>" alt="<?= e($nombreEl) ?> y <?= e($nombreElla) ?>"
+      <img src="<?= e($c['foto_portada']) ?>" alt="<?= e($nombreEl) ?> y <?= e($nombreElla) ?>" loading="lazy" decoding="async"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
       <div class="placeholder-label" style="display:none; height:100%; align-items:center; justify-content:center;">
         Foto de portada<br>(reemplaza en config.php)
@@ -357,7 +359,7 @@ $nombreElla = $c['novios']['ella'];
       <div class="gallery__track" data-gallery-track data-autoplay="4200">
         <?php foreach ($c['galeria'] as $i => $foto): ?>
           <div class="gallery__item">
-            <img src="<?= e($foto) ?>" alt="Foto <?= (int)($i + 1) ?> de <?= e($nombreEl) ?> y <?= e($nombreElla) ?>"
+            <img src="<?= e($foto) ?>" alt="Foto <?= (int)($i + 1) ?> de <?= e($nombreEl) ?> y <?= e($nombreElla) ?>" loading="lazy" decoding="async"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="placeholder-label" style="display:none; height:100%; align-items:center; justify-content:center;">
               Foto <?= (int)($i + 1) ?>

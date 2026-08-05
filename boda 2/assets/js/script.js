@@ -186,6 +186,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /* ---------------- Background lazy-loading for the intro hero ---------------- */
+  const bgEls = document.querySelectorAll('[data-bg]');
+  if ('IntersectionObserver' in window && bgEls.length) {
+    const bgObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const src = el.getAttribute('data-bg');
+          if (src) {
+            el.style.backgroundImage = `url('${src}')`;
+            el.removeAttribute('data-bg');
+          }
+          observer.unobserve(el);
+        }
+      });
+    }, { rootMargin: '200px' });
+    bgEls.forEach(el => bgObserver.observe(el));
+  } else {
+    bgEls.forEach(el => {
+      const src = el.getAttribute('data-bg');
+      if (src) {
+        el.style.backgroundImage = `url('${src}')`;
+        el.removeAttribute('data-bg');
+      }
+    });
+  }
+
   /* ---------------- Nav: fondo sólido al hacer scroll ---------------- */
   const nav = document.querySelector('.nav');
   if (nav) {
