@@ -355,7 +355,7 @@ $nombreElla = $c['novios']['ella'];
       <h2>Galería</h2>
     </div>
 
-    <div class="gallery reveal">
+    <div class="gallery reveal is-visible">
       <div class="gallery__track" data-gallery-track data-autoplay="4200">
         <?php foreach ($c['galeria'] as $i => $foto): ?>
           <div class="gallery__item">
