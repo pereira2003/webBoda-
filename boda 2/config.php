@@ -85,8 +85,8 @@ return [
         'assets/img/foto2.jpg',
         'assets/img/foto3.jpg',
         'assets/img/foto4.jpg',
-        'assets/img/foto5.jpg',
-        'assets/img/foto6.jpg',
+        'assets/img/foto5.jpeg',
+        'assets/img/foto6.jpeg',
     ],
 
     // Foto principal de portada (hero)
