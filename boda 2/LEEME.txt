@@ -1,0 +1,22 @@
+Coloca aquí las fotos reales de la pareja con estos nombres
+(o cambia las rutas en config.php si prefieres otros nombres):
+
+  portada.jpg      -> foto principal que aparece en la sección "Nuestra historia"
+  foto1.jpg
+  foto2.jpg
+  foto3.jpg        -> fotos que aparecen en el carrusel de la galería
+                      (agrega más líneas en config.php > 'galeria' si quieres más)
+  intro-fondo.jpg   -> paisaje de fondo detrás del sobre animado de bienvenida
+
+Ya se incluyeron 5 fotos reales de la pareja en assets/img/ como
+punto de partida — puedes reemplazarlas por las que prefieras
+siguiendo los mismos nombres de archivo.
+
+Mientras no exista una imagen, la web muestra automáticamente un
+recuadro con el texto "Foto de portada" o "Foto 1", "Foto 2", etc.,
+así que el sitio nunca se ve roto aunque falte alguna foto (esto no
+aplica al fondo del sobre: revisa que intro-fondo.jpg siempre exista).
+
+Recomendación: usa fotos en formato .jpg, idealmente en proporción
+vertical (4:5) y con un peso menor a 500 KB cada una para que la
+web cargue rápido.
