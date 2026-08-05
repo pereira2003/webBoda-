@@ -44,7 +44,7 @@ $nombreElla = $c['novios']['ella'];
   <div class="intro__scrim"></div>
 
   <div class="intro__stage">
-    <p class="intro__eyebrow reveal is-visible">Nos casamos</p>
+    <p class="intro__eyebrow reveal is-visible">Has recibido un correo de <?= e($nombreEl) ?> y <?= e($nombreElla) ?></p>
 
     <button type="button" class="envelope" data-envelope aria-label="<?= e($c['sobre']['texto_boton']) ?>">
       <span class="envelope__shadow" aria-hidden="true"></span>
@@ -62,7 +62,7 @@ $nombreElla = $c['novios']['ella'];
         <span class="envelope__lace"><i></i><i></i></span>
       </span>
 
-      <span class="envelope__seal" aria-hidden="true"><?= e(mb_substr($c['sobre']['monograma'],0,1)) ?></span>
+      <span class="envelope__seal" aria-hidden="true"><?= e(mb_substr($nombreEl, 0, 1) . mb_substr($nombreElla, 0, 1)) ?></span>
     </button>
 
     <p class="intro__hint" data-intro-hint><?= e($c['sobre']['texto_boton']) ?></p>
